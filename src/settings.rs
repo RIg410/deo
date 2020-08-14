@@ -3,7 +3,7 @@ use bevy_ron::ser::PrettyConfig;
 use serde::{Deserialize, Serialize};
 use std::fs;
 
-const CFG: &'static str = "assets/settings/cfg.ron";
+const CFG: &str = "assets/settings/cfg.ron";
 
 pub struct SettingsPlugin;
 
