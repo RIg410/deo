@@ -6,4 +6,5 @@ edition = "2018"
 
 [dependencies]
 bevy = "0.1.2"
+bevy_ron = "0.1"
 serde = "1.0"

@@ -1,0 +1,13 @@
+(
+    window: (
+        width: 1280,
+        height: 720,
+        vsync: true,
+    ),
+    world: (
+        plane: (
+            initial_position: (0, 0, 0),
+            initial_direction: (0, 0, 0),
+        ),
+    ),
+)

@@ -993,6 +993,7 @@ name = "deo"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "bevy_ron",
  "serde",
 ]
 

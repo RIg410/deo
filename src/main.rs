@@ -1,5 +1,5 @@
-mod plane;
 mod cam;
+mod plane;
 mod settings;
 
 use bevy::prelude::*;
