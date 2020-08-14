@@ -5,10 +5,5 @@ authors = []
 edition = "2018"
 
 [dependencies]
-amethyst = "0.15.0"
-
-[features]
-default = ["metal"]
-empty = ["amethyst/empty"]
-metal = ["amethyst/metal"]
-vulkan = ["amethyst/vulkan"]
+bevy = "0.1.2"
+serde = "1.0"
