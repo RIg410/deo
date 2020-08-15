@@ -56,10 +56,10 @@ fn plane_control_system(
             rotation.0 *= Quat::from_rotation_z(0.01);
         }
         if keyboard_input.pressed(KeyCode::A) {
-            rotation.0 *= Quat::from_rotation_y(-0.01);
+            rotation.0 *= Quat::from_rotation_y(0.01);
         }
         if keyboard_input.pressed(KeyCode::D) {
-            rotation.0 *= Quat::from_rotation_y(0.01);
+            rotation.0 *= Quat::from_rotation_y(-0.01);
         }
     }
 }
@@ -70,7 +70,7 @@ fn plane_movement_system(
 ) {
     for (_, mut translation, rotation) in &mut plane_query.iter() {
         let rt = Mat4::from_rotation_translation(rotation.0, translation.0);
-        let rt = rt * Mat4::from_translation(Vec3::new(0.01, 0.0, 0.0));
+        let rt = rt * Mat4::from_translation(Vec3::new(0.5, 0.0, 0.0));
         let (_, _, tr) = rt.to_scale_rotation_translation();
         translation.0 = tr;
     }
