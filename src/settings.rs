@@ -64,11 +64,27 @@ impl Default for Window {
 
 #[derive(Serialize, Deserialize, Clone, Properties, Default)]
 pub struct World {
-    plane: Plane,
+    pub plane: Plane,
+    pub camera: Camera,
 }
 
 #[derive(Serialize, Deserialize, Clone, Properties, Default)]
 pub struct Plane {
-    initial_position: Vec3,
-    initial_direction: Vec3,
+    pub initial_position: Vec3,
+    pub initial_direction: Quat,
+}
+
+#[derive(Serialize, Deserialize, Clone, Properties)]
+pub struct Camera {
+    pub relative_position: Vec3,
+    pub relative_target: Vec3,
+}
+
+impl Default for Camera {
+    fn default() -> Self {
+        Camera {
+            relative_position: Vec3::new(-10.0, 5.0, 0.0),
+            relative_target: Vec3::default(),
+        }
+    }
 }

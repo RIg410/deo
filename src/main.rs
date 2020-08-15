@@ -1,6 +1,6 @@
-mod cam;
-mod plane;
-mod settings;
+pub mod cam;
+pub mod plane;
+pub mod settings;
 
 use bevy::prelude::*;
 
