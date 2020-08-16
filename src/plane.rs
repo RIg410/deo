@@ -1,5 +1,7 @@
 use crate::settings::*;
+use crate::world::{Terrain, CollisionIndex};
 use bevy::prelude::*;
+use std::process::exit;
 
 #[derive(Debug)]
 pub struct Plane;
@@ -13,7 +15,8 @@ impl Plugin for PlanePlugin {
     fn build(&self, app: &mut AppBuilder) {
         app.add_startup_system(setup_plane.system())
             .add_system(plane_control_system.system())
-            .add_system(plane_movement_system.system());
+            .add_system(plane_movement_system.system())
+            .add_system(plane_collision_system.system());
     }
 }
 
@@ -73,5 +76,31 @@ fn plane_movement_system(
         let rt = rt * Mat4::from_translation(Vec3::new(0.5, 0.0, 0.0));
         let (_, _, tr) = rt.to_scale_rotation_translation();
         translation.0 = tr;
+    }
+}
+
+/// TODO change collision algorithms.
+fn plane_collision_system(
+    mut plane: Query<(&Plane, &mut Translation, &Rotation, &Handle<Mesh>)>,
+    mut terrain: Query<(&Terrain, &CollisionIndex)>,
+) {
+    for (_, mut translation, rotation, handle) in &mut plane.iter() {
+        for (_, index) in &mut terrain.iter() {
+            match index.vertex.iter()
+                .find(|point| {
+                    let point_2 = translation.0;
+                    let distance = ((point.x() - point_2.x()).powi(2)
+                        + (point.y() - point_2.y()).powi(2)
+                        + (point.z() - point_2.z()).powi(2)).sqrt();
+
+                    distance <= 10.0
+                }) {
+                Some(point) => {
+                    println!("Collision:{:?}", point);
+                    *translation.0.y_mut() += 100.0;
+                }
+                None => {}
+            }
+        }
     }
 }
